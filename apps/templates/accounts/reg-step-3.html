@@ -1,0 +1,28 @@
+<form hx-post="{{ request.path }}" class="modal-content">
+  {% csrf_token %}
+  <div class="modal-header">
+    <h5 class="modal-title">Create Account - Step 3</h5>
+  </div>
+  <div class="modal-body">
+
+  <div class="input-group mb-2 mr-sm-2">
+    <input type="text" class="form-control" id="email" placeholder="Email">
+  </div>
+    <div class="input-group mb-2 mr-sm-2">
+    <input type="text" class="form-control" id="password" placeholder="Password">
+  </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-bs-dismiss="modal">Cancel</button>
+    <button class="btn bg-gradient-dark w-100 my-4 mb-2" hx-post="{% url 'create_account' %}" hx-target="#dialog">Done</button>
+  </div>
+</form>
+<script>
+  htmx.on("htmx:beforeSwap", (e) => {
+  // Empty response targeting #dialog => hide the modal
+  if (e.detail.target.id == "dialog" && !e.detail.xhr.response) {
+    mod2.hide()
+    e.detail.shouldSwap = false
+  }
+})</script>

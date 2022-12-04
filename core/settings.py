@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps',
-    'apps.home',                                    # Enable the inner home (home)
+    'apps.home',  
+    'apps.authentication',                                  # Enable the inner home (home)
     'allauth',                                      # OAuth new
     'allauth.account',                              # OAuth new
     'allauth.socialaccount',                        # OAuth new 
@@ -124,6 +125,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'apps.User'
 
 #############################################################
 # SRC: https://devcenter.heroku.com/articles/django-assets

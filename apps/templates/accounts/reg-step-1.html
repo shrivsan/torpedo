@@ -1,0 +1,27 @@
+<form hx-post="{{ request.path }}" class="modal-content">
+  {% csrf_token %}
+  <div class="modal-header">
+    <h5 class="modal-title">Create Account - Step 1</h5>
+  </div>
+  <div class="modal-body">
+    {% if msg %}
+    <ul class="alert alert-danger" style="list-style: none;">
+    <li>{{ msg }}</li>
+    </ul>
+    {% endif %}
+    {{ form.as_p }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-bs-dismiss="modal">Cancel</button>
+    <button class="btn bg-gradient-dark w-100 my-4 mb-2" type="submit">Next</button>
+  </div>
+</form>
+
+<script>
+  const mod2 = new bootstrap.Modal(document.getElementById("modal"))
+  htmx.on("htmx:afterSettle", (e) => {
+  // Response targeting #dialog => show the modal
+  if (e.detail.target.id == "dialog") {
+    mod2.show()
+  }
+}) </script>

@@ -10,12 +10,7 @@ class CustomBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
         try:
-            user = UserModel.objects.filter(username=username).first()
-            if user is None:
-                user = UserModel.objects.get(email=username)
-        except UserModel.DoesNotExist:
+            user = UserModel.objects.get(username=username, password=password)
+            return user
+        except:
             return None
-        else:
-            if user.check_password(password):
-                return user
-        return None
